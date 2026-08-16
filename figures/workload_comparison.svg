@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="430" viewBox="0 0 900 430">
+  <rect width="900" height="430" fill="#ffffff"/>
+  <style>
+    .title{font:700 22px Arial,sans-serif;fill:#172033}.sub{font:14px Arial,sans-serif;fill:#5a6475}.label{font:12px Arial,sans-serif;fill:#394457}.tick{font:11px Arial,sans-serif;fill:#6a7484}.axis{stroke:#d7dce5;stroke-width:1}.grid{stroke:#eef1f5;stroke-width:1}.cost{fill:#4f6bed}.fair{fill:#32a277}.legend{font:13px Arial,sans-serif;fill:#394457}
+  </style>
+  <text x="450" y="31" text-anchor="middle" class="title">Workload allocation by worker</text>
+  <text x="450" y="53" text-anchor="middle" class="sub">The fairness-priority solution compresses workloads to 10–11 days per worker</text>
+
+  <line x1="80" y1="340" x2="840" y2="340" class="axis"/>
+  <line x1="80" y1="90" x2="80" y2="340" class="axis"/>
+  <line x1="80" y1="277.5" x2="840" y2="277.5" class="grid"/><text x="68" y="281" text-anchor="end" class="tick">4</text>
+  <line x1="80" y1="215" x2="840" y2="215" class="grid"/><text x="68" y="219" text-anchor="end" class="tick">8</text>
+  <line x1="80" y1="152.5" x2="840" y2="152.5" class="grid"/><text x="68" y="156" text-anchor="end" class="tick">12</text>
+  <line x1="80" y1="90" x2="840" y2="90" class="grid"/><text x="68" y="94" text-anchor="end" class="tick">16</text>
+  <text x="30" y="215" transform="rotate(-90 30 215)" text-anchor="middle" class="label">Assigned days</text>
+
+  <!-- worker 1: 10 vs 11 -->
+  <rect x="110" y="183.75" width="32" height="156.25" rx="3" class="cost"/><rect x="145" y="168.125" width="32" height="171.875" rx="3" class="fair"/>
+  <!-- worker 2: 4 vs 10 -->
+  <rect x="215" y="277.5" width="32" height="62.5" rx="3" class="cost"/><rect x="250" y="183.75" width="32" height="156.25" rx="3" class="fair"/>
+  <!-- worker 3: 8 vs 11 -->
+  <rect x="320" y="215" width="32" height="125" rx="3" class="cost"/><rect x="355" y="168.125" width="32" height="171.875" rx="3" class="fair"/>
+  <!-- worker 4: 16 vs 11 -->
+  <rect x="425" y="90" width="32" height="250" rx="3" class="cost"/><rect x="460" y="168.125" width="32" height="171.875" rx="3" class="fair"/>
+  <!-- worker 5: 16 vs 11 -->
+  <rect x="530" y="90" width="32" height="250" rx="3" class="cost"/><rect x="565" y="168.125" width="32" height="171.875" rx="3" class="fair"/>
+  <!-- worker 6: 15 vs 11 -->
+  <rect x="635" y="105.625" width="32" height="234.375" rx="3" class="cost"/><rect x="670" y="168.125" width="32" height="171.875" rx="3" class="fair"/>
+  <!-- worker 7: 6 vs 10 -->
+  <rect x="740" y="246.25" width="32" height="93.75" rx="3" class="cost"/><rect x="775" y="183.75" width="32" height="156.25" rx="3" class="fair"/>
+
+  <text x="143" y="362" text-anchor="middle" class="label">Worker 1</text><text x="248" y="362" text-anchor="middle" class="label">Worker 2</text><text x="353" y="362" text-anchor="middle" class="label">Worker 3</text><text x="458" y="362" text-anchor="middle" class="label">Worker 4</text><text x="563" y="362" text-anchor="middle" class="label">Worker 5</text><text x="668" y="362" text-anchor="middle" class="label">Worker 6</text><text x="773" y="362" text-anchor="middle" class="label">Worker 7</text>
+
+  <rect x="317" y="389" width="14" height="14" rx="2" class="cost"/><text x="338" y="401" class="legend">Cost priority</text>
+  <rect x="470" y="389" width="14" height="14" rx="2" class="fair"/><text x="491" y="401" class="legend">Fairness priority</text>
+</svg>
