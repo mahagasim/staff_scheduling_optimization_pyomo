@@ -1,0 +1,11 @@
+{
+  "days": ["day1", "day2", "day3", "day4", "day5", "day6", "day7", "day8", "day9", "day10", "day11", "day12", "day13", "day14", "day15", "day16", "day17", "day18", "day19", "day20", "day21"],
+  "workers": ["worker_1", "worker_2", "worker_3", "worker_4", "worker_5", "worker_6", "worker_7"],
+  "shift_limits": {"day1": 2, "day2": 2, "day3": 2, "day4": 2, "day5": 2, "day6": 4, "day7": 4, "day8": 2, "day9": 2, "day10": 2, "day11": 2, "day12": 4, "day13": 4, "day14": 2, "day15": 2, "day16": 2, "day17": 4, "day18": 4, "day19": 2, "day20": 2, "day21": 2},
+  "salaries": {"worker_1": 20, "worker_2": 18, "worker_3": 15, "worker_4": 12, "worker_5": 10, "worker_6": 17, "worker_7": 10},
+  "supervisor_days": ["day6", "day7", "day12", "day13", "day17", "day18"],
+  "supervisors": ["worker_1", "worker_2", "worker_3"],
+  "not_available": {"worker_1": ["day13", "day14"], "worker_2": ["day9", "day10"], "worker_3": ["day16", "day17"], "worker_4": ["day1", "day2", "day3"], "worker_5": ["day4", "day5", "day6"], "worker_6": ["day7", "day8"], "worker_7": ["day11", "day12"]},
+  "weekly_hours_limit": 40,
+  "hours_per_shift": 8
+}
