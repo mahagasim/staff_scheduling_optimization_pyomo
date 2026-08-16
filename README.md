@@ -281,6 +281,8 @@ The contrast is particularly visible for Workers 2, 4, 5 and 6. The fairness obj
 
 The goal is to schedule **seven regular workers across 21 days** while satisfying operational constraints.
 
+Let $\mathcal W$ denote the set of regular workers and $\mathcal D=\{1,\ldots,21\}$ the planning days.
+
 The model includes:
 
 - daily staffing requirements
@@ -292,102 +294,108 @@ The model includes:
 
 The portfolio reconstruction evaluates two alternative objectives after first minimizing temporary-worker use:
 
-1. **Cost-priority solution**  
-   Minimize total regular-worker labor cost.
-
-2. **Fairness-priority solution**  
-   Minimize the difference between the largest and smallest individual workloads, then minimize labor cost among schedules with the same optimal fairness level.
+1. **Cost-priority solution** — minimize total regular-worker labor cost.
+2. **Fairness-priority solution** — minimize the difference between the largest and smallest individual workloads, then minimize labor cost among schedules with the same optimal fairness level.
 
 ---
 
 # Mathematical formulation
 
-Let
+## Decision variables
 
-\[
-x_{wd}\in\{0,1\}
-\]
+For every worker $w\in\mathcal W$ and day $d\in\mathcal D$, define
 
-equal 1 if regular worker \(w\) is assigned to work on day \(d\).
+$$
+x_{wd}
+=
+\begin{cases}
+1, & \text{if worker } w \text{ is assigned on day } d,\\
+0, & \text{otherwise}.
+\end{cases}
+$$
 
-Let
+Temporary-worker use is represented by
 
-\[
-e_d \in \mathbb{Z}_{+}
-\]
+$$
+e_d\in\mathbb Z_{+},
+\qquad d\in\mathcal D,
+$$
 
-denote the number of temporary workers used on day \(d\).
+where $e_d$ is the number of temporary workers used on day $d$.
 
-Let:
+Parameters are:
 
-- \(r_d\): required number of workers on day \(d\)
-- \(c_w\): labor cost of regular worker \(w\)
-- \(s_w\): skill level of worker \(w\)
-- \(q_d\): minimum required skill level on day \(d\)
+- $r_d$: required number of workers on day $d$;
+- $c_w$: labor cost of regular worker $w$;
+- $s_w$: skill level of regular worker $w$;
+- $q_d$: minimum skill level required on day $d$.
 
 ## Daily staffing requirement
 
-For each day,
+For every day $d\in\mathcal D$,
 
-\[
-\sum_w x_{wd} + e_d = r_d
-\qquad \forall d.
-\]
+$$
+\sum_{w\in\mathcal W}x_{wd}+e_d=r_d.
+$$
 
-This ensures that the required number of workers is assigned every day.
-
----
+This ensures exact daily staffing coverage.
 
 ## Availability constraint
 
-If worker \(w\) is unavailable on day \(d\),
+If worker $w$ is unavailable on day $d$, then
 
-\[
+$$
 x_{wd}=0.
-\]
+$$
 
-Availability is therefore enforced directly in the optimization model.
-
----
+Availability is therefore imposed directly on the assignment variables.
 
 ## Consecutive-workday constraint
 
-For each worker and each four-day period,
+For every worker $w\in\mathcal W$ and every four-day window beginning at $d=1,\ldots,18$,
 
-\[
-\sum_{j=d}^{d+3} x_{wj}\leq 3.
-\]
+$$
+\sum_{j=d}^{d+3}x_{wj}\le 3.
+$$
 
-A worker therefore cannot work all four days in any consecutive four-day window.
-
----
+Thus no worker may be assigned on all four days of any consecutive four-day period.
 
 ## Skill requirement
 
-Each day must contain at least one regular employee whose skill level satisfies the day's minimum requirement:
+Let
 
-\[
-\sum_{w:s_w\geq q_d}x_{wd}\geq1
-\qquad \forall d.
-\]
+$$
+\mathcal W_d^{\mathrm{qual}}
+=
+\{w\in\mathcal W:s_w\ge q_d\}
+$$
 
-This formulation ensures that at least one actually qualified employee is scheduled.
+be the workers whose skill level meets the threshold for day $d$. Then
+
+$$
+\sum_{w\in\mathcal W_d^{\mathrm{qual}}}x_{wd}\ge 1,
+\qquad d\in\mathcal D.
+$$
+
+This guarantees that at least one sufficiently skilled regular worker is assigned each day.
 
 ---
 
 # Cost objective
 
-Conditional on the minimum required temporary-worker use, the cost-priority model minimizes:
+Conditional on the minimum feasible temporary-worker use, the cost-priority problem is
 
-\[
-\min \sum_w \sum_d c_w x_{wd}.
-\]
+$$
+\min_{x,e}
+\quad
+\sum_{w\in\mathcal W}\sum_{d\in\mathcal D}c_wx_{wd}.
+$$
 
-The resulting regular labor cost is:
+The resulting regular labor cost is
 
-\[
-\boxed{685}
-\]
+$$
+\boxed{685},
+$$
 
 with zero temporary-worker days.
 
@@ -395,76 +403,86 @@ with zero temporary-worker days.
 
 # Fairness objective
 
-Define employee workload as:
+Define the workload of worker $w$ as
 
-\[
-L_w=\sum_d x_{wd}.
-\]
+$$
+L_w=\sum_{d\in\mathcal D}x_{wd}.
+$$
 
 Let
 
-\[
-L^{\max} = \max_w L_w
-\]
+$$
+L^{\max}=\max_{w\in\mathcal W}L_w,
+\qquad
+L^{\min}=\min_{w\in\mathcal W}L_w.
+$$
 
-and
+The fairness objective is
 
-\[
-L^{\min} = \min_w L_w.
-\]
+$$
+\min_{x,e}
+\quad
+L^{\max}-L^{\min}.
+$$
 
-The fairness objective minimizes:
+The optimal fairness-priority solution satisfies
 
-\[
-\min \left(L^{\max}-L^{\min}\right).
-\]
-
-The optimal fairness-priority solution produces:
-
-\[
+$$
 L^{\max}-L^{\min}=1.
-\]
+$$
 
-Conditional on that optimal fairness level, the model minimizes labor cost.
+Conditional on that optimal fairness level, labor cost is minimized. The resulting regular labor cost is
 
-The resulting labor cost is:
-
-\[
+$$
 \boxed{725}.
-\]
+$$
 
 ---
 
 # Lexicographic optimization
 
-The optimization is performed in stages.
+The optimization is performed sequentially rather than by assigning arbitrary weights to competing objectives.
 
-### Stage 1 — Staffing feasibility
+### Stage 1 — minimize temporary-worker use
 
-Minimize temporary-worker use:
+$$
+E^*
+=
+\min_{x,e}
+\sum_{d\in\mathcal D}e_d.
+$$
 
-\[
-\min \sum_d e_d.
-\]
+The optimum is
 
-The optimum is:
+$$
+E^*=0.
+$$
 
-\[
-\boxed{0}
-\]
+### Stage 2A — cost-priority solution
 
-temporary-worker days.
+Conditional on $\sum_de_d=E^*$,
 
-### Stage 2 — Scenario-specific objective
+$$
+C^*
+=
+\min_x
+\sum_{w\in\mathcal W}\sum_{d\in\mathcal D}c_wx_{wd}.
+$$
 
-Conditional on zero temporary-worker use:
+### Stage 2B — fairness-priority solution
 
-- the **cost model** minimizes labor cost
-- the **fairness model** minimizes workload inequality
+Conditional on $\sum_de_d=E^*$,
 
-For the fairness scenario, cost is minimized again among equally fair schedules.
+$$
+F^*
+=
+\min_x
+\left(L^{\max}-L^{\min}\right).
+$$
 
-This structure avoids mixing objectives with arbitrary weights.
+Among schedules satisfying $L^{\max}-L^{\min}=F^*$, the model then minimizes regular labor cost.
+
+This lexicographic structure makes the optimization priorities explicit and avoids an arbitrary weighted-sum objective.
 
 ---
 
@@ -484,11 +502,11 @@ The original formulation aggregated employee skill scores.
 
 That can incorrectly satisfy a skill requirement even if **no individual assigned worker is sufficiently qualified**.
 
-The reconstruction instead requires at least one assigned worker with
+The reconstruction instead requires
 
-\[
-s_w \geq q_d.
-\]
+$$
+\sum_{w\in\mathcal W_d^{\mathrm{qual}}}x_{wd}\ge1.
+$$
 
 ## 3. Fairness objective
 
@@ -498,9 +516,9 @@ It therefore did not actually measure inequality between workers.
 
 The reconstruction explicitly minimizes
 
-\[
+$$
 L^{\max}-L^{\min}.
-\]
+$$
 
 ---
 
