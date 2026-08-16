@@ -4,6 +4,37 @@ A mixed-integer optimization project reconstructed from my MSc **Managerial Deci
 
 The original submitted notebook is preserved in this repository. During a 2026 portfolio audit I found several formulation issues in the coursework model, so I added a separate **validated reconstruction** rather than silently presenting the original numerical outputs as correct.
 
+## Key results
+
+The corrected model can satisfy the full 21-day staffing plan with **zero temporary-worker days**. The main result is a transparent cost–equity trade-off:
+
+- **Cost priority:** labor cost = **685**, workload range = **12 days**.
+- **Fairness priority:** labor cost = **725**, workload range = **1 day**.
+- A **5.8% increase in regular labor cost** reduces the workload range from 12 days to 1 day.
+
+![Cost–fairness trade-off](figures/objective_tradeoff.svg)
+
+The low-cost solution concentrates assignments on cheaper workers, while the fairness objective redistributes work almost evenly across the seven regular employees.
+
+![Worker-level workload comparison](figures/workload_comparison.svg)
+
+| Scenario | Temporary-worker days | Regular labor cost | Workload range |
+|---|---:|---:|---:|
+| Cost priority | **0** | **685** | **12 days** |
+| Fairness priority | **0** | **725** | **1 day** |
+
+### Workload allocation
+
+| Worker | Cost priority | Fairness priority |
+|---|---:|---:|
+| worker_1 | 10 | 11 |
+| worker_2 | 4 | 10 |
+| worker_3 | 8 | 11 |
+| worker_4 | 16 | 11 |
+| worker_5 | 16 | 11 |
+| worker_6 | 15 | 11 |
+| worker_7 | 6 | 10 |
+
 ## Problem
 
 Schedule seven regular workers over a 21-day planning horizon subject to:
@@ -18,31 +49,6 @@ The portfolio version studies two competing objectives after first minimizing te
 
 1. **Cost priority:** minimize regular labor cost.
 2. **Fairness priority:** minimize the range between the most- and least-worked regular employees, then minimize labor cost among equally fair schedules.
-
-## Results at a glance
-
-The corrected model can satisfy the full 21-day staffing plan with **zero temporary-worker days**.
-
-| Scenario | Temporary-worker days | Regular labor cost | Workload range |
-|---|---:|---:|---:|
-| Cost priority | **0** | **685** | **12 days** |
-| Fairness priority | **0** | **725** | **1 day** |
-
-The fairness-priority solution therefore increases regular labor cost by **40** (about **5.8%**) while reducing the workload range from 12 days to 1 day.
-
-### Workload allocation
-
-| Worker | Cost priority | Fairness priority |
-|---|---:|---:|
-| worker_1 | 10 | 11 |
-| worker_2 | 4 | 10 |
-| worker_3 | 8 | 11 |
-| worker_4 | 16 | 11 |
-| worker_5 | 16 | 11 |
-| worker_6 | 15 | 11 |
-| worker_7 | 6 | 10 |
-
-This is a genuine cost–equity trade-off: the lowest-cost solution concentrates work on cheaper workers, whereas the fairness objective spreads assignments almost evenly.
 
 ## Mathematical formulation
 
@@ -103,6 +109,9 @@ staff_scheduling_optimization_pyomo/
 │   └── original_github_Data.json         # archived pre-audit repo input
 ├── docs/
 │   └── model_audit.md
+├── figures/
+│   ├── objective_tradeoff.svg
+│   └── workload_comparison.svg
 ├── src/
 │   └── solve_staff_schedule.py
 ├── results/
