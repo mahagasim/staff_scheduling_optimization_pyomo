@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="390" viewBox="0 0 900 390">
+  <rect width="900" height="390" fill="#ffffff"/>
+  <style>
+    .title{font:700 22px Arial,sans-serif;fill:#172033}.sub{font:14px Arial,sans-serif;fill:#5a6475}.label{font:13px Arial,sans-serif;fill:#394457}.value{font:700 18px Arial,sans-serif;fill:#172033}.axis{stroke:#d7dce5;stroke-width:1}.bar1{fill:#4f6bed}.bar2{fill:#32a277}
+  </style>
+  <text x="450" y="32" text-anchor="middle" class="title">Cost–fairness trade-off in the validated schedule</text>
+  <text x="450" y="55" text-anchor="middle" class="sub">Both solutions use zero temporary-worker days</text>
+
+  <text x="225" y="91" text-anchor="middle" class="label">Regular labor cost</text>
+  <line x1="85" y1="300" x2="365" y2="300" class="axis"/>
+  <rect x="125" y="116" width="80" height="184" rx="5" class="bar1"/>
+  <rect x="245" y="105" width="80" height="195" rx="5" class="bar2"/>
+  <text x="165" y="108" text-anchor="middle" class="value">685</text>
+  <text x="285" y="97" text-anchor="middle" class="value">725</text>
+  <text x="165" y="323" text-anchor="middle" class="label">Cost priority</text>
+  <text x="285" y="323" text-anchor="middle" class="label">Fairness priority</text>
+
+  <text x="675" y="91" text-anchor="middle" class="label">Workload range (days)</text>
+  <line x1="535" y1="300" x2="815" y2="300" class="axis"/>
+  <rect x="575" y="120" width="80" height="180" rx="5" class="bar1"/>
+  <rect x="695" y="285" width="80" height="15" rx="5" class="bar2"/>
+  <text x="615" y="111" text-anchor="middle" class="value">12</text>
+  <text x="735" y="276" text-anchor="middle" class="value">1</text>
+  <text x="615" y="323" text-anchor="middle" class="label">Cost priority</text>
+  <text x="735" y="323" text-anchor="middle" class="label">Fairness priority</text>
+
+  <text x="450" y="362" text-anchor="middle" class="sub">A 5.8% increase in regular labor cost reduces the workload range from 12 days to 1 day.</text>
+</svg>
