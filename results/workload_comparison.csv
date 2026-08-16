@@ -1,0 +1,8 @@
+worker,cost_priority_days,fairness_priority_days
+worker_1,10,11
+worker_2,4,10
+worker_3,8,11
+worker_4,16,11
+worker_5,16,11
+worker_6,15,11
+worker_7,6,10
