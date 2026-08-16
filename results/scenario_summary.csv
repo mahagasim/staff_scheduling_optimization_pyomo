@@ -1,0 +1,3 @@
+scenario,minimum_temporary_worker_days,labor_cost,workload_range
+cost_priority,0,685,12
+fairness_priority,0,725,1
